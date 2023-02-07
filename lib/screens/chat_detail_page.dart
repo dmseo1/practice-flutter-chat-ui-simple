@@ -101,38 +101,43 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       ),
       body: Stack(
         children: [
-          ListView.builder(
-            itemCount: messages.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 10,
-                ),
-                child: Align(
-                  alignment: (messages[index].messageType == 'receiver'
-                      ? Alignment.topLeft
-                      : Alignment.topRight),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: (messages[index].messageType == 'receiver'
-                          ? Colors.grey.shade200
-                          : Colors.blue[200]),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      messages[index].messageContent,
-                      style: const TextStyle(
-                        fontSize: 15,
+          Padding(
+            padding: const EdgeInsets.only(
+              bottom: 80,
+            ),
+            child: ListView.builder(
+              reverse: true,
+              itemCount: messages.length,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
+                  child: Align(
+                    alignment: (messages[index].messageType == 'receiver'
+                        ? Alignment.topLeft
+                        : Alignment.topRight),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: (messages[index].messageType == 'receiver'
+                            ? Colors.grey.shade200
+                            : Colors.blue[200]),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        messages[index].messageContent,
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
           Align(
             alignment: Alignment.bottomLeft,
